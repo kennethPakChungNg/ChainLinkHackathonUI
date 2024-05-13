@@ -35,7 +35,7 @@
       </mat-form-field>
       <button mat-raised-button color="primary" 
         (click)="analyzeSmartContract()"
-        [disabled]="!contractAddress && (!solidityVersion.trim() || !smartContractCode.trim() || !isValidSolidityVersion(solidityVersion))"
+        [disabled]="!contractAddress && (!smartContractCode.trim() || (solidityVersion && !isValidSolidityVersion(solidityVersion)))"
         class="analyze-button">Analyze Contract
       </button>
     </div>
