@@ -1,59 +1,144 @@
-<!-- sidebar.component.html -->
 <aside class="sidebar">
   <div>
     <ul class="nav flex-column">
-      <!-- existing nav-items -->
       <li class="nav-item">
-        <a class="nav-link" routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
+        <a class="nav-link" routerLink="/dashboard" routerLinkActive="active">
+          <img id="menu-icon" src="assets/images/icons/dashboard.svg">
+          Dashboard</a>
       </li>
-      <span class="analysis-option" *ngIf="(userService.currentUser | async)">Analysis Option</span>
-      <li class="nav-item" *ngIf="(userService.currentUser | async)">
-        <span class="analysis-option">
-          <img src="assets/images/icons/smart-contracts.png" alt="Dashboard" class="sidebar-icon">
-          Smart Contracts</span>
-          <ul class="nav flex-column sub-menu">
-            <li class="nav-item">
-              <a id="sub-title" class="nav-link" routerLink="/smart-contracts" routerLinkActive="active">Analysis New Contract</a>
-            </li>
-            <li class="nav-item">
-              <a id="sub-title" class="sub-title nav-link" routerLink="/analysis-history" routerLinkActive="active">
-                Smart Contract Analysis History</a>
-            </li>
-          </ul>
-      </li>
-      <li class="nav-item" *ngIf="(userService.currentUser | async)">
-        <span class="analysis-option">
-          <img src="assets/images/icons/transaction.png" alt="Dashboard" class="sidebar-icon">
-          Fraud Transactions</span>
-        <ul class="nav flex-column sub-menu">
-          <li class="nav-item">
-            <a id="sub-title" class="sub-title nav-link" routerLink="/fraud-transactions" routerLinkActive="active">Analysis New Transactions</a>
+      <li class="nav-item analysis-menu" *ngIf="isLoggedIn">
+        <a class="nav-link" (click)="toggleMenu('analysis')">
+          <img id="menu-icon" src="assets/images/icons/analysis.svg">
+          Analysis Option 
+          <img src="assets/images/icons/expand.svg" *ngIf="!isExpanded['analysis']"> 
+          <img src="assets/images/icons/collapse.svg" *ngIf="isExpanded['analysis']">
+        </a>
+        <ul class="nav flex-column sub-menu" [ngClass]="{'show': isExpanded['analysis']}">
+          <li class="nav-item" *ngIf="isExpanded['analysis']">
+            <a class="nav-link" (click)="toggleMenu('smartContract')">
+              <img id="smartcontract-image" src="assets/images/icons/smartcontract.svg">
+              Smart Contracts
+              <img id="sidebar-image" src="assets/images/icons/expand.svg" *ngIf="!isExpanded['smartContract']">
+              <img id="sidebar-image" src="assets/images/icons/collapse.svg" *ngIf="isExpanded['smartContract']">
+            </a>
+            <ul id="smart-contract-menu" class="nav flex-column sub-menu" [ngClass]="{'show': isExpanded['smartContract']}">
+              <li class="nav-item" *ngIf="isExpanded['smartContract']">
+                <a class="nav-link" (click)="toggleMenu('solidity')">
+                  <img id="contract-lan-icon" src="assets/images/icons/solidity.png">
+                  Solidity
+                  <img src="assets/images/icons/expand.svg" *ngIf="!isExpanded['solidity']">
+                  <img src="assets/images/icons/collapse.svg" *ngIf="isExpanded['solidity']">
+                </a>
+                <ul class="nav flex-column sub-menu" [ngClass]="{'show': isExpanded['solidity']}">
+                  <li class="nav-item">
+                    <a id="smart-contract-sub-menu" class="nav-link" routerLink="/smart-contracts" routerLinkActive="active">New Smart Contract</a>
+                  </li>
+                  <li class="nav-item">
+                    <a id="smart-contract-sub-menu" class="nav-link" routerLink="/analysis-history" routerLinkActive="active">Analysis History</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
           </li>
-          <li class="nav-item">
-            <a id="sub-title" class="sub-title nav-link" routerLink="/fraud-analysis-history" routerLinkActive="active">Fraud Transaction Analysis History</a>
+          <li class="nav-item" *ngIf="isExpanded['analysis']">
+            <a class="nav-link" (click)="toggleMenu('fraudTransaction')">
+              <img id="transaction-image" src="assets/images/icons/transaction.svg">
+              Fraud Transactions
+              <img id="sidebar-fraud-image" src="assets/images/icons/expand.svg" *ngIf="!isExpanded['fraudTransaction']">
+              <img id="sidebar-fraud-image" src="assets/images/icons/collapse.svg" *ngIf="isExpanded['fraudTransaction']">
+            </a>
+            <ul id="transaction-menu" class="nav flex-column sub-menu" [ngClass]="{'show': isExpanded['fraudTransaction']}">
+              <li class="nav-item" *ngIf="isExpanded['fraudTransaction']">
+                <a class="nav-link" (click)="toggleMenu('ethereum')">
+                  <img id="coin-icon"src="assets/images/icons/ethereum-icon.png">
+                  Ethereum
+                  <img id="sidebar-fraud-sub-image" src="assets/images/icons/expand.svg" *ngIf="!isExpanded['ethereum']">
+                  <img id="sidebar-fraud-sub-image" src="assets/images/icons/collapse.svg" *ngIf="isExpanded['ethereum']">
+                </a>
+                <ul class="nav flex-column sub-menu" [ngClass]="{'show': isExpanded['ethereum']}">
+                  <li id="sidebar-fraud-word" class="nav-item" *ngIf="isExpanded['ethereum']">
+                    <a class="nav-link" routerLink="/fraud-transactions" routerLinkActive="active">New Transactions</a>
+                  </li>
+                  <li id="sidebar-fraud-word" class="nav-item" *ngIf="isExpanded['ethereum']">
+                    <a class="nav-link" routerLink="/fraud-analysis-history" routerLinkActive="active">Analysis History</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item" *ngIf="isExpanded['fraudTransaction']">
+                <a class="nav-link" (click)="toggleMenu('polygon')">
+                  <img id="coin-icon"src="assets/images/icons/polygon-icon.png">
+                  Polygon
+                  <img id="sidebar-fraud-ploygon-sub-image" src="assets/images/icons/expand.svg" *ngIf="!isExpanded['polygon']">
+                  <img id="sidebar-fraud-ploygon-sub-image" src="assets/images/icons/collapse.svg" *ngIf="isExpanded['polygon']">
+                </a>
+                <ul class="nav flex-column sub-menu" [ngClass]="{'show': isExpanded['polygon']}">
+                  <li id="sidebar-fraud-word" class="nav-item" *ngIf="isExpanded['polygon']">
+                    <a class="nav-link" routerLink="/fraud-transactions" routerLinkActive="active">New Transactions</a>
+                  </li>
+                  <li id="sidebar-fraud-word" class="nav-item" *ngIf="isExpanded['polygon']">
+                    <a class="nav-link" routerLink="/fraud-analysis-history" routerLinkActive="active">Analysis History</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item" *ngIf="isExpanded['fraudTransaction']">
+                <a class="nav-link" (click)="toggleMenu('avalanche')">
+                  <img id="coin-icon"src="assets/images/icons/avalanche-icon.png">
+                  Avalanche
+                  <img id="sidebar-fraud-avalanche-sub-image" src="assets/images/icons/expand.svg" *ngIf="!isExpanded['avalanche']">
+                  <img id="sidebar-fraud-avalanche-sub-image" src="assets/images/icons/collapse.svg" *ngIf="isExpanded['avalanche']">
+                </a>
+                <ul class="nav flex-column sub-menu" [ngClass]="{'show': isExpanded['avalanche']}">
+                  <li id="sidebar-fraud-word" class="nav-item" *ngIf="isExpanded['avalanche']">
+                    <a class="nav-link" routerLink="/fraud-transactions" routerLinkActive="active">New Transactions</a>
+                  </li>
+                  <li id="sidebar-fraud-word" class="nav-item" *ngIf="isExpanded['avalanche']">
+                    <a class="nav-link" routerLink="/fraud-analysis-history" routerLinkActive="active">Analysis History</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
           </li>
         </ul>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="/documentation" routerLinkActive="active">Documentation</a>
+        <a class="nav-link" routerLink="/documentation" routerLinkActive="active">
+          <img id="menu-icon" src="assets/images/icons/doc.svg">
+          Documentation
+        </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="/support">Support</a>
+        <a class="nav-link" routerLink="/support" routerLinkActive="active">
+          <img id="menu-icon" src="assets/images/icons/support.svg">
+          Support
+        </a>
       </li>
-      <li class="nav-item" *ngIf="(userService.currentUser | async)">
-        <a class="nav-link" routerLink="/settings" routerLinkActive="active">Settings</a>
+      <li class="nav-item" *ngIf="isLoggedIn">
+        <a class="nav-link" routerLink="/settings" routerLinkActive="active">
+          <img id="menu-icon" src="assets/images/icons/setting.svg">
+          Settings
+        </a>
       </li>
     </ul>
   </div>
-  <br>
   <div class="bottom-links">
-    <a class="nav-link"  id="system-label" *ngIf="(userService.currentUser | async) === null" routerLink="/register">Register</a>
+    <a class="nav-link" id="system-label" *ngIf="!isLoggedIn" routerLink="/register">
+      <img id="menu-icon" src="assets/images/icons/register.svg">
+      Register
+    </a>
     <br>
-    <a class="nav-link" id="system-label" *ngIf="(userService.currentUser | async) === null" routerLink="/login">Login</a>
+    <a class="nav-link" id="system-label" *ngIf="!isLoggedIn" routerLink="/login">
+      <img id="menu-icon" src="assets/images/icons/login.svg">
+      Login
+    </a>
     <br>
-    <div class="display-username" id="system-label" *ngIf="(userService.currentUser | async)">Login User: {{ (userService.currentUser | async)?.username }}</div>
+    <div class="display-username" id="system-label" *ngIf="isLoggedIn">
+      <img id="menu-icon" src="assets/images/icons/user.svg">
+      Login User: {{ (userService.currentUser | async)?.username }}
+    </div>
     <br>
-    <a class="nav-link" id="system-label" *ngIf="(userService.currentUser | async)" (click)="logout()">Logout</a>
-    <br>   
+    <a class="nav-link" id="system-label" *ngIf="isLoggedIn" (click)="logout()">
+      <img id="menu-icon" src="assets/images/icons/logout.svg">
+      Logout
+    </a>
   </div>
 </aside>

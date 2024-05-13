@@ -200,10 +200,16 @@ label {
     font-weight: bold;
 }
 
-#result_title, #history_title {
+#result_title {
     text-align: center;
     font-weight: 900;
     text-decoration: underline;
+    padding: 20px;
+}
+
+#history_title {
+    text-align: center;
+    font-weight: 900;
     padding: 20px;
 }
 
@@ -235,4 +241,11 @@ textarea {
         flex-direction: column; /* Stack form elements in a column on smaller screens */
     }
 }
+
+img {
+    width: 50px;
+    margin-right: 10px;
+    margin-bottom: 20px;
+}
+  
   

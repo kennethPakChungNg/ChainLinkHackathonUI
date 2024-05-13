@@ -32,6 +32,11 @@ export class SmartContractService {
       // ... add other escapes if necessary
   }
 
+  // Fetch contract details by address
+  fetchContractByAddress(contractAddress: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/getContractDetails/${contractAddress}`);
+  }
+
   analyzeSmartContract(solidityVersion: string, contractCode: string) {
     const apiUrl = 'http://localhost:5000/detect_vulnerability';
     const payload = {

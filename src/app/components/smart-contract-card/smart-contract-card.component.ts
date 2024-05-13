@@ -15,6 +15,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class SmartContractCardComponent {
   solidityVersion: string = '';
+  contractAddress: string = '';
   smartContractCode: string = '';
   analysisResult: any;
   contractName: string = '';
@@ -33,6 +34,7 @@ export class SmartContractCardComponent {
     this.checkUserLogin();
   }
 
+  // Check if user is logged in
   checkUserLogin(): void {
     const currentUser = this.userService.currentUserValue;
     if (!currentUser) {
@@ -42,42 +44,40 @@ export class SmartContractCardComponent {
     }
   }
 
+  //Check Solidity version is correct format
   isValidSolidityVersion(version: string): boolean {
     const versionPattern = /^\d+\.\d+\.\d+$/;  // Pattern for "number.number.number" format
     return versionPattern.test(version);
   }
 
+  // Analyze smart contract based on provided details (smart contract address or solidity version and smart contract code)
   analyzeSmartContract(): void {
-    // Clear previous analysis result
-    this.analysisResult = null;
-    
-    // Only proceed if the Solidity version is valid and smart contract code is not empty
-    if (this.isValidSolidityVersion(this.solidityVersion) && this.smartContractCode.trim()) {
-      // Set loading to true to show spinner
-      this.isLoading = true;
+    this.analysisResult = null;  // Clear previous results
+    this.isLoading = true;
   
-      // Perform the analysis
-      this.smartContractService.analyzeSmartContract(this.solidityVersion, this.smartContractCode)
-        .subscribe({
-          next: (response: any) => {
-            // Process the response
-            this.analysisResult = response;
-            this.isLoading = false; // Hide spinner after getting the response
-            this.changeDetectorRef.detectChanges(); // Trigger change detection
-          },
-          error: (error) => {
-            console.error('API call failed:', error);
-            this.isLoading = false; // Hide spinner on error
-            this.snackBar.open('Analysis failed. Please try again.', 'Close', { 
-              duration: 3000,
-              horizontalPosition: 'center',
-              verticalPosition: 'top',
-              panelClass: ['my-custom-snackbar'] 
-            });
-          }
-        });
+    // Check if a contract address is provided, fetch details first
+    if (this.contractAddress.trim()) {
+      this.smartContractService.fetchContractByAddress(this.contractAddress).subscribe({
+        next: (data) => {
+          this.solidityVersion = data.solidityVersion;
+          this.smartContractCode = data.sourceCode;
+          // After fetching, perform analysis
+          this.performAnalysis();
+        },
+        error: (err) => {
+          this.snackBar.open('Failed to fetch contract details. Please check the address and try again.', 'Close', {
+            duration: 3000,
+            verticalPosition: 'top',
+            horizontalPosition: 'center'
+          });
+          this.isLoading = false;
+        }
+      });
+    } else if (this.isValidSolidityVersion(this.solidityVersion) && this.smartContractCode.trim()) {
+      // If no address is provided but code and version are, perform analysis directly
+      this.performAnalysis();
     } else {
-      // Show appropriate error message if conditions are not met
+      this.isLoading = false;  // Stop loading if conditions are not met
       if (!this.isValidSolidityVersion(this.solidityVersion)) {
         this.snackBar.open('Solidity version format is incorrect. Use format: X.Y.Z (e.g., 0.8.4)', 'Close', {
           duration: 3000,
@@ -95,8 +95,60 @@ export class SmartContractCardComponent {
       }
     }
   }
+
+  // Perform smart contract analysis
+  private performAnalysis() {
+    this.smartContractService.analyzeSmartContract(this.solidityVersion, this.smartContractCode)
+      .subscribe({
+        next: (response: any) => {
+          this.analysisResult = response;
+          this.isLoading = false; // Hide spinner after getting the response
+          this.changeDetectorRef.detectChanges(); // Trigger change detection
+        },
+        error: (error) => {
+          console.error('API call failed:', error);
+          this.isLoading = false; // Hide spinner on error
+          this.snackBar.open('Analysis failed. Please try again.', 'Close', {
+            duration: 3000,
+            horizontalPosition: 'center',
+            verticalPosition: 'top',
+            panelClass: ['my-custom-snackbar']
+          });
+        }
+      });
+  }
   
 
+  //Use contract address to fetch contract details
+  fetchContractDetails() {
+    if (!this.contractAddress.trim()) {
+      this.snackBar.open('Please enter a valid contract address.', 'Close', {
+        duration: 3000,
+        verticalPosition: 'top',
+        horizontalPosition: 'center'
+      });
+      return;
+    }
+    this.isLoading = true;
+    this.smartContractService.fetchContractByAddress(this.contractAddress).subscribe({
+      next: (data) => {
+        this.solidityVersion = data.solidityVersion;
+        this.smartContractCode = data.sourceCode;
+        this.isLoading = false;
+      },
+      error: (err) => {
+        this.snackBar.open('Failed to fetch contract details. Please check the address and try again.', 'Close', {
+          duration: 3000,
+          verticalPosition: 'top',
+          horizontalPosition: 'center'
+        });
+        this.isLoading = false;
+      }
+    });
+  }
+  
+  
+  //Save smart contract
   saveSmartContract(): void {
     // Retrieve the current user from UserService
     const currentUser = this.userService.currentUserValue;

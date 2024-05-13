@@ -31,7 +31,7 @@ export class FraudTransactionsCardComponent {
         duration: 3000,
         verticalPosition: 'top',
         horizontalPosition: 'center',
-        panelClass: ['centered-snack-bar'] // Ensure this class is defined in your global styles.css
+        panelClass: ['centered-snack-bar'] 
       });
       return;
     }

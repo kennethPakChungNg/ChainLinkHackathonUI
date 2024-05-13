@@ -33,6 +33,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { AnalysisHistoryComponent } from './components/analysis-history/analysis-history.component';
 import { FraudAnalysisHistoryComponent } from './components/fraud-analysis-history/fraud-analysis-history.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -69,7 +70,8 @@ import { FraudAnalysisHistoryComponent } from './components/fraud-analysis-histo
     HttpClientModule, 
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    NgbModule
   ],
   providers: [
     provideAnimationsAsync('noop'),

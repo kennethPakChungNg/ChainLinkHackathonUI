@@ -1,13 +1,12 @@
 .sidebar {
   background-color: #1e1e1e;
   color: white;
-  padding: 2rem;
+  padding: 1rem;
   position: fixed; /* Fixed position */
   top: 0;
   bottom: 0; /* Full height */
   left: 0;
-  width: 220px; /* Sidebar width */
-  
+  width: 350px; /* Sidebar width */
   z-index: 1000; /* Keeps the sidebar on top of other elements */
   max-height: 100vh; /* Viewport Height */
 }
@@ -15,8 +14,8 @@
 .bottom-links {
   position: absolute;
   bottom: 0;
-  width: 100%;
-  padding-bottom: 1rem;
+  width: 80%;
+  padding: 1rem;
 }
 
 .system-label {
@@ -25,17 +24,79 @@
 
 .analysis-option {
   cursor: default;
-  color: #ffffff; /* Example color */
+  color: #ffffff;
+  padding: 1rem;
+}
+
+.sub-analysis-option {
+  cursor: default;
+  color: #ffffff;
+  padding: 1rem;
+  margin-bottom: 20px;
 }
 
 .sub-menu {
-  padding-left: 50px; /* Adjust the value as needed */
+  display: none;
+  padding-left: 20px;
   margin-left: 1rem;
 }
 
-/* Content Area CSS */
+#smart-contract-menu, #transaction-menu {
+  margin-left: 38px;
+  padding-bottom: 5px;
+}
+
+#coin-icon, #contract-lan-icon {
+  margin: 0;
+  width: 23px;
+  height: 23px;
+  margin-bottom: 3px;
+}
+
+#sidebar-fraud-word {
+  margin-left: 10px;
+}
+
+.sub-menu.show {
+  display: block;
+}
+
+img {
+  margin-left: 121px;
+  margin-bottom: 5px;
+  width: 25px;
+}
+
+#sidebar-image {
+  margin-left: 90px;
+}
+
+#sidebar-fraud-image {
+  margin-left: 71px;
+}
+
+#sidebar-fraud-sub-image {
+  margin-left: 107px;
+}
+
+#sidebar-fraud-ploygon-sub-image {
+  margin-left: 117px;
+}
+
+#sidebar-fraud-avalanche-sub-image {
+  margin-left: 103px;
+}
+
+#smartcontract-image, #transaction-image {
+  margin-left: 10px;
+}
+
+#menu-icon {
+  margin-left: 0;
+}
+
 .content {
-  margin-left: 200px; /* Adjust this to match the width of your sidebar */
+  margin-left: 200px;
   padding: 1rem;
   overflow-x: hidden; /* Prevents horizontal scroll */
 }
@@ -50,7 +111,7 @@
 }
 
 .nav-item {
-  margin: 1rem 0;
+  margin: 4px 0;
 }
 
 .nav-link {
@@ -59,9 +120,28 @@
   transition: color 0.3s ease;
 }
 
+.analysis-menu .nav-link {
+  cursor: pointer;
+}
+
+.sidebar-icon {
+  float: right;
+  margin-left: 5px;
+}
+
+
 .nav-link:hover,
 .nav-link.active {
   color: #04d9ff; /* A light blue, for instance */
+}
+
+.sub-menu {
+  display: none;  /* Ensures sub-menus are not displayed unless explicitly toggled */
+  margin-left: 1rem;
+}
+
+.sub-menu.show {
+  display: block;  /* Only shown when 'show' class is added by Angular */
 }
 
 #system-label {
@@ -69,10 +149,21 @@
 }
 
 .sidebar-icon {
-  width: 12px;  /* Or the size you want */
-  height: 12px; /* Or the size you want */
-  margin-right: 2px; /* Space between icon and label */
-  vertical-align: middle; /* Align icon with text */
+  width: 12px;  
+  height: 12px; 
+  margin-right: 2px; 
+  vertical-align: middle; 
 }
+
+/* Additional styles */
+.sub-sub-menu, .sub-sub-sub-menu {
+  display: none;
+}
+
+#smart-contract-sub-menu {
+  margin-left: 10px;
+}
+
+
 
 

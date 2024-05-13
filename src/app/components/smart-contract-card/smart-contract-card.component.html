@@ -1,7 +1,10 @@
 <!-- smart-contract-card.component.html -->
 <mat-card class="smart-contract-analysis-card">
   <mat-card-header class="page_title">
-    <mat-card-title class="header_title">Smart Contract Analysis</mat-card-title>
+    <mat-card-title class="header_title">
+      <img src="assets/images/icons/solidity-big-logo.svg" alt="Solidity Logo">
+      <u>Solidity Smart Contract Analysis</u>
+    </mat-card-title>
   </mat-card-header>
   <mat-card-content>
     <label class="sub_title">Smart Contract Name (Required For Saving The Result)*</label>
@@ -9,6 +12,13 @@
       <mat-form-field appearance="outline" class="input_field">
         <mat-label>Smart Contract Name (For saving analysis result)*</mat-label>
         <input matInput placeholder="Enter name" [(ngModel)]="contractName">
+      </mat-form-field>
+    </div>
+    <label class="sub_title">Smart Contract Address*</label>
+    <div class="transaction-form">
+      <mat-form-field appearance="outline" class="input_field">
+        <mat-label>Smart Contract Address</mat-label>
+        <input matInput placeholder="Enter Contract Address" [(ngModel)]="contractAddress">
       </mat-form-field>
     </div>
     <label class="sub_title">Solidity Version (Required)*</label>
@@ -25,9 +35,9 @@
       </mat-form-field>
       <button mat-raised-button color="primary" 
         (click)="analyzeSmartContract()"
-        [disabled]="!solidityVersion.trim() || !smartContractCode.trim() || !isValidSolidityVersion(solidityVersion)"
+        [disabled]="!contractAddress && (!solidityVersion.trim() || !smartContractCode.trim() || !isValidSolidityVersion(solidityVersion))"
         class="analyze-button">Analyze Contract
-      </button> 
+      </button>
     </div>
     <br>
     <div class="spinner-container" *ngIf="isLoading">

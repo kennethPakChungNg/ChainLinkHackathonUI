@@ -1,15 +1,15 @@
 <!-- Add your template code here with the table and search fields as described -->
-<h1 id="history_title">Smart Contract Vulnerability Analysis History</h1>
-<!-- Table for displaying analysis history -->
+<h1 id="history_title">
+    <img src="assets/images/icons/solidity-big-logo.svg" alt="Solidity Logo">
+    <u>Solidity Smart Contract Vulnerability Analysis History</u>
+</h1>
 <table>
-<!-- Table headers -->
     <tr>
         <th>Contract Name</th>
         <th>Vulnerability Type</th>
         <th>Security Level</th>
         <th>Creation Date</th>
     </tr>
-    <!-- Table rows for analysis history -->
     <tr *ngFor="let entry of analysisHistory" 
         (click)="selectEntry(entry)"
         [class.selected-row]="selectedEntry === entry">
@@ -48,7 +48,7 @@
 </div>
 <!-- Add form fields for displaying and editing the selected analysis result -->
 <div *ngIf="selectedEntry">
-    <h1 id="result_title">Select Analysis Result</h1>
+    <h1 id="result_title">Selected Analysis Result</h1>
     <div class="form-container">
         <div class="form-element">
             <label for="location">Smart Contract Name</label>
