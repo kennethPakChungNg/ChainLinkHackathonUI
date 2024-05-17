@@ -34,6 +34,10 @@ import { LoginComponent } from './components/login/login.component';
 import { AnalysisHistoryComponent } from './components/analysis-history/analysis-history.component';
 import { FraudAnalysisHistoryComponent } from './components/fraud-analysis-history/fraud-analysis-history.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FraudTransactionsCardAvalancheComponent } from './components/fraud-transactions-card-avalanche/fraud-transactions-card-avalanche.component';
+import { FraudTransactionsHistoryAvalancheComponent } from './components/fraud-transactions-history-avalanche/fraud-transactions-history-avalanche.component';
+import { FraudTransactionsCardPolygonComponent } from './components/fraud-transactions-card-polygon/fraud-transactions-card-polygon.component';
+import { FraudTransactionsHistoryPolygonComponent } from './components/fraud-transactions-history-polygon/fraud-transactions-history-polygon.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +57,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     RegisterComponent,
     LoginComponent,
     AnalysisHistoryComponent,
-    FraudAnalysisHistoryComponent
+    FraudAnalysisHistoryComponent,
+    FraudTransactionsCardAvalancheComponent,
+    FraudTransactionsHistoryAvalancheComponent,
+    FraudTransactionsCardPolygonComponent,
+    FraudTransactionsHistoryPolygonComponent
   ],
   imports: [
     BrowserModule,

@@ -28,17 +28,20 @@
       "logLevel": "debug"
     },
 
+
     "/deleteContract": {
       "target": "http://localhost:5000/",
       "secure": false,
       "logLevel": "debug"
     },
 
+
     "/searchAnalysis": {
       "target": "http://localhost:5000/",
       "secure": false,
       "logLevel": "debug"
     },
+    
 
     "/detect_vulnerability": {
       "target": "http://localhost:5000/",
@@ -46,13 +49,27 @@
       "logLevel": "debug"
     },
 
-  
 
-    "/detect_fraud": {
+    "ethTxns/detect_fraud": {
       "target": "http://localhost:5000/",
       "secure": false,
       "logLevel": "debug"
     },
+    
+
+    "/avax/detect_fraud": {
+      "target": "http://localhost:5000/",
+      "secure": false,
+      "logLevel": "debug"
+    },
+
+
+    "/polygon/detect_fraud": {
+      "target": "http://localhost:5000/",
+      "secure": false,
+      "logLevel": "debug"
+    },
+
 
     "/searchFraudAnalysis": {
       "target": "http://localhost:5000/",

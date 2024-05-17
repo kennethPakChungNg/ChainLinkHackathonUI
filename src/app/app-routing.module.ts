@@ -11,6 +11,10 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { AnalysisHistoryComponent } from './components/analysis-history/analysis-history.component';
 import { FraudAnalysisHistoryComponent } from './components/fraud-analysis-history/fraud-analysis-history.component';
+import { FraudTransactionsCardAvalancheComponent } from './components/fraud-transactions-card-avalanche/fraud-transactions-card-avalanche.component';
+import { FraudTransactionsHistoryAvalancheComponent } from './components/fraud-transactions-history-avalanche/fraud-transactions-history-avalanche.component';
+import { FraudTransactionsCardPolygonComponent } from './components/fraud-transactions-card-polygon/fraud-transactions-card-polygon.component';
+import { FraudTransactionsHistoryPolygonComponent } from './components/fraud-transactions-history-polygon/fraud-transactions-history-polygon.component';
 //import { DashboardTemplateDashboardComponent } from './components/dashboard_template/dashboard.component';
 
 
@@ -27,6 +31,10 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'analysis-history', component: AnalysisHistoryComponent},
   { path: 'fraud-analysis-history', component: FraudAnalysisHistoryComponent },
+  { path: 'fraud-transactions-avalanche', component: FraudTransactionsCardAvalancheComponent },
+  { path: 'fraud-analysis-history-avalanche', component: FraudTransactionsHistoryAvalancheComponent },
+  { path: 'fraud-transactions-polygon', component: FraudTransactionsCardPolygonComponent },
+  { path: 'fraud-analysis-history-polygon', component: FraudTransactionsHistoryPolygonComponent },
 
   // Lazy-loaded routes
   {

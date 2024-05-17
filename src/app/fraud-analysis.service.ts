@@ -62,6 +62,20 @@ export class FraudAnalysisService {
   }
 
 
+  analyzeFraudTransactionAvalanche(transactionHash: string): Observable<any> {
+    const apiUrl = `${this.apiUrl}/avax/detect_fraud`; 
+    const payload = { hash: transactionHash };
+    return this.http.post<any>(apiUrl, payload);
+  }
+  
+
+  analyzeFraudTransactionPolygon(transactionHash: string): Observable<any> {
+    const apiUrl = 'https://api.polygonscan.com/api'; // Update this to the correct Polygon API endpoint
+    const payload = { hash: transactionHash };
+    return this.http.post<any>(apiUrl, payload);
+  }
+
+
   // Save new fraud analysis result
   saveFraudAnalysis(fraudAnalysis: any, userId: number, transactionName: string, transactionHash: string): Observable<any> {
     const apiUrl = `${this.apiUrl}/saveFraudAnalysis`;
@@ -73,6 +87,7 @@ export class FraudAnalysisService {
     };
     return this.http.post<any>(apiUrl, payload);
   }
+
   
   // Update existing fraud analysis result
   updateFraudAnalysis(fraudAnalysisId: number, fraudAnalysisData: any): Observable<any> {
@@ -85,6 +100,7 @@ export class FraudAnalysisService {
   deleteFraudAnalysis(fraudAnalysisId: number): Observable<any> {
     return this.http.delete<any>(`${this.apiUrl}/deleteFraudAnalysis/${fraudAnalysisId}`);
   }
+  
 
   // Format the analysis result to match your front-end structure
   public formatAnalysisResult(analysisData: any): any {

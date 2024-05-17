@@ -22,7 +22,7 @@ export class SmartContractService {
       params: { userId, name, type, date }
     });
   }
-
+  
   // Utility function to escape special characters for JSON string
   escapeForJson(str: string): string {
     return str
