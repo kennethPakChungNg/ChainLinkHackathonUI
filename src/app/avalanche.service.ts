@@ -47,15 +47,17 @@ export class AvalancheService {
   }
 
   getGasPrices(): Observable<any> {
-    const safeGasPrice = 25; // Fixed value for safe gas price in nAVAX
-
     return forkJoin({
       baseFee: this.getBaseFee(),
       priorityFee: this.getPriorityFee()
     }).pipe(
       map((fees: { baseFee: any, priorityFee: any }) => {
-        const proposedGasPrice = parseInt(fees.baseFee.result, 16) / 1e9; // Convert from wei to Gwei
-        const fastGasPrice = (parseInt(fees.baseFee.result, 16) + parseInt(fees.priorityFee.result, 16)) / 1e9; // Convert from wei to Gwei
+        const baseFee = parseInt(fees.baseFee.result, 16) / 1e9; // Convert from wei to Gwei
+        const priorityFee = parseInt(fees.priorityFee.result, 16) / 1e9; // Convert from wei to Gwei
+        const safeGasPrice = 25; // Fixed value for safe gas price in nAVAX
+        const proposedGasPrice = baseFee;
+        const fastGasPrice = baseFee + priorityFee;
+
         return {
           SafeGasPrice: safeGasPrice,
           ProposeGasPrice: proposedGasPrice,

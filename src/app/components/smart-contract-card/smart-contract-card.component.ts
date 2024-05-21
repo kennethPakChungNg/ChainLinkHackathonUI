@@ -56,24 +56,7 @@ export class SmartContractCardComponent {
     this.isLoading = true;
   
     // Check if a contract address is provided, fetch details first
-    if (this.contractAddress.trim()) {
-      this.smartContractService.fetchContractByAddress(this.contractAddress).subscribe({
-        next: (data) => {
-          this.solidityVersion = data.solidityVersion;
-          this.smartContractCode = data.sourceCode;
-          // After fetching, perform analysis
-          this.performAnalysis();
-        },
-        error: (err) => {
-          this.snackBar.open('Failed to fetch contract details. Please check the address and try again.', 'Close', {
-            duration: 3000,
-            verticalPosition: 'top',
-            horizontalPosition: 'center'
-          });
-          this.isLoading = false;
-        }
-      });
-    } else if (this.isValidSolidityVersion(this.solidityVersion) && this.smartContractCode.trim()) {
+    if (this.isValidSolidityVersion(this.solidityVersion) && this.smartContractCode.trim()) {
       // If no address is provided but code and version are, perform analysis directly
       this.performAnalysis();
     } else {
