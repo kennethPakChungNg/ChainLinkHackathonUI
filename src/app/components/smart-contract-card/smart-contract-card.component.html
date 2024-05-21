@@ -7,26 +7,49 @@
     </mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <label class="sub_title">Smart Contract Name (Required For Saving The Result)*</label>
-    <div class="transaction-form">
-      <mat-form-field appearance="outline" class="input_field">
-        <mat-label>Smart Contract Name (For saving analysis result)*</mat-label>
-        <input matInput placeholder="Enter name" [(ngModel)]="contractName">
-      </mat-form-field>
-    </div>
-    <label class="sub_title">Smart Contract Address*</label>
-    <div class="transaction-form">
-      <mat-form-field appearance="outline" class="input_field">
-        <mat-label>Smart Contract Address</mat-label>
-        <input matInput placeholder="Enter Contract Address" [(ngModel)]="contractAddress">
-      </mat-form-field>
-    </div>
-    <label class="sub_title">Solidity Version (Required)*</label>
-    <div class="transaction-form">
-      <mat-form-field appearance="outline" class="input_field">
-        <mat-label>Enter Solidity version (e.g. 0.8.4)</mat-label>
-        <input matInput placeholder="Enter Solidity Version" [(ngModel)]="solidityVersion">
-      </mat-form-field>
+    <div class="form-container">
+      <div class="form-section">
+        <label class="sub_title">Smart Contract Name (Required For Saving The Result)*</label>
+        <div class="transaction-form">
+          <mat-form-field appearance="outline" class="input_field">
+            <mat-label>Smart Contract Name (For saving analysis result)*</mat-label>
+            <input matInput placeholder="Enter name" [(ngModel)]="contractName">
+          </mat-form-field>
+        </div>
+        <label class="address-sub-title"><span style="color: #88aaf1;">Ethereum</span> Chain Smart Contract Address*</label>
+        <div class="transaction-form">
+          <div class="smart-contract-address-div">
+            <mat-form-field appearance="outline" class="input_field">
+              <mat-label>Ethereum Chain Smart Contract Address</mat-label>
+              <input matInput placeholder="Enter Contract Address" [(ngModel)]="contractAddress">
+            </mat-form-field>
+            <button id="get-contract-button" mat-raised-button color="primary">
+              Get Contract
+            </button>
+          </div>
+        </div>
+        <label class="sub_title">Solidity Version (Required)*</label>
+        <div class="transaction-form">
+          <mat-form-field appearance="outline" class="input_field">
+            <mat-label>Enter Solidity version (e.g. 0.8.4)</mat-label>
+            <input matInput placeholder="Enter Solidity Version" [(ngModel)]="solidityVersion">
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="instruction-section">
+        <div class="instruction">
+          <p id="instruction-label-text">
+            <b>Instruction:</b>
+          </p>
+          <p id="instruction-text">
+            User could input the Ethereum chain smart contract address and press the get contract button. The contract source code will be  
+            catch from the address and display in <b>Solidity Version</b> field and <b>Smart Contract Code</b> field.
+          </p>
+          <p id="instruction-text">
+            If it is another chain's Solidity smart contract, user need to input the Solidity version and contract source code directly.
+          </p>
+        </div>
+      </div>
     </div>
     <label class="sub_title">Smart Contract Code (Required)*</label>
     <div class="transaction-form">  
@@ -64,5 +87,3 @@
     </div>
   </mat-card-content>
 </mat-card>
-
-

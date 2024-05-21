@@ -1,4 +1,3 @@
-/* dashboard.component.css */
 .dashboard-wrapper {
   max-width: 1200px;
   margin: auto;
@@ -6,14 +5,75 @@
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+.header-title{
+  display: flex;
+}
+
+.header-text {
+  width: 50px;
+  margin-top: 6px;
+  font-size: 30px;
+}
+
+#header-icon {
+  width: 35px;
+  height: 35px;
+  margin-right: 20px;
+}
+
 .stats-cards {
   display: flex;
-  flex-wrap: wrap;
+  justify-content: space-between;
   gap: 20px;
   margin-top: 20px;
 }
 
-/* Style for loading and error states */
+.card {
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 100%;
+}
+
+.eth-card {
+  background: linear-gradient(to bottom right, #141414, #8c8c8c);
+}
+
+.sub-title {
+  display: flex;
+}
+
+.polygon-card {
+  background: linear-gradient(to bottom right, #8247e5, #E49BFF);
+}
+
+.avax-card {
+  background: linear-gradient(to bottom right, #e84142, #FF8989);
+}
+
+.card-body {
+  padding: 20px;
+  text-align: left;
+}
+
+.sub-title-icon {
+  width: 40px;
+  margin-right: 20px;
+  margin-bottom: 10px;
+}
+
+.card-title {
+  font-size: 24px;
+  color: white;
+  margin-bottom: 5px;
+  margin-top: 7px;
+}
+
+.card-text {
+  font-size: 20px;
+  color: white;
+}
+
 .loading-text, .error-text {
   text-align: center;
 }
@@ -22,32 +82,10 @@
   margin-bottom: 30px;
 }
 
-.card {
-  border: none;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.card-body {
-  padding: 20px;
-  text-align: left;
-}
-
-.card-title {
-  font-size: 24px;
-  color: #333;
-  margin-bottom: 5px;
-}
-
-.card-text {
-  font-size: 20px;
-  color: #666;
-}
-
-.stats-cards {
-  display: flex;
-  gap: 20px;
+.full-width-rectangle {
+  width: 100%;
+  height: 200px;
+  background-color: #007bff;
   margin-top: 20px;
+  border-radius: 10px;
 }
-
-/* You can add more specific styles here to match the Hacken UI */

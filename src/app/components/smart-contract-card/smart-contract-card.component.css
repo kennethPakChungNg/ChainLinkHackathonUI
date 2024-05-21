@@ -1,3 +1,4 @@
+/* smart-contract-card.component.css */
 .smart-contract-analysis-card h2,
 .smart-contract-analysis-card h3,
 .smart-contract-analysis-card h4 {
@@ -13,6 +14,20 @@ h2 {
   margin-bottom: 10px;
   font-size: 25px;
   font-weight: bold;
+}
+
+.form-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.form-section {
+  flex: 1;
+}
+
+.instruction-section {
+  flex: 1;
+  margin-left: 20px; /* Add margin to space it out from the form */
 }
 
 .transaction-form {
@@ -58,7 +73,7 @@ button {
 }
 
 .input_field {
-  width: 40%;
+  width: 100%;
   height: 20px;
 }
 
@@ -68,7 +83,7 @@ button {
   font-weight: bold;
 }
 
-.security_level{
+.security_level {
   color: red;
 }
 
@@ -78,7 +93,6 @@ button {
   align-items: center;
   height: 100%;
 }
-
 
 .spinner-container {
   display: flex;
@@ -108,4 +122,46 @@ img {
   margin-right: 10px;
   margin-bottom: 30px;
 }
-  
+
+.instruction {
+  background-color: #1e1e1e;
+  padding: 0 10px;
+  width: 80%;
+  height: 95%;
+  color: white;
+  border-radius: 10px;
+}
+
+#instruction-text {
+  color: white;
+  font-size: large;
+  padding: 0 10px;
+  line-height: 2;
+  text-align: left;
+  font-family: system-ui;
+}
+
+#instruction-label-text {
+  color: white;
+  font-size: 30px;
+  padding: 10px;
+  line-height: 1.5;
+  text-align: left;
+  font-family: system-ui;
+}
+
+.smart-contract-address-div {
+  display: flex;
+}
+
+.address-sub-title{
+  font-size: large;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+#get-contract-button{
+  margin-left: 20px;
+  width: 240px;
+  height: 55px;
+}
