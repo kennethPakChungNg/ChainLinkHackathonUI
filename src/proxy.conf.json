@@ -1,43 +1,43 @@
 { 
     "/login": {
-      "target": "http://127.0.0.1:5000/",
+      "target": "http://127.0.0.1:6001/",
       "secure": false
     },
 
     "/register": {
-      "target": "http://127.0.0.1:5000/",
+      "target": "http://127.0.0.1:6001/",
       "secure": false
     },
 
     "/analysisHistory/*": {
-      "target": "http://localhost:5000/",
+      "target": "http://localhost:6001/",
       "secure": false,
       "logLevel": "debug"
     },
 
     "/saveContract": {
-      "target": "http://localhost:5000/",
+      "target": "http://localhost:6001/",
       "secure": false,
       "logLevel": "debug"
     },
     
 
     "/updateContract": {
-      "target": "http://localhost:5000/",
+      "target": "http://localhost:6001/",
       "secure": false,
       "logLevel": "debug"
     },
 
 
     "/deleteContract": {
-      "target": "http://localhost:5000/",
+      "target": "http://localhost:6001/",
       "secure": false,
       "logLevel": "debug"
     },
 
 
     "/searchAnalysis": {
-      "target": "http://localhost:5000/",
+      "target": "http://localhost:6001/",
       "secure": false,
       "logLevel": "debug"
     },
@@ -72,26 +72,26 @@
 
 
     "/searchFraudAnalysis": {
-      "target": "http://localhost:5000/",
+      "target": "http://localhost:6001/",
       "secure": false,
       "logLevel": "debug"
     },
 
     
     "/saveFraudAnalysis/*": {
-      "target": "http://localhost:5000/",
+      "target": "http://localhost:6001/",
       "secure": false,
       "logLevel": "debug"
     },
 
     "/updateFraudAnalysis/*": {
-      "target": "http://localhost:5000/",
+      "target": "http://localhost:6001/",
       "secure": false,
       "logLevel": "debug"
     },
 
     "/deleteFraudAnalysis/*": {
-      "target": "http://localhost:5000/",
+      "target": "http://localhost:6001/",
       "secure": false,
       "logLevel": "debug"
     }

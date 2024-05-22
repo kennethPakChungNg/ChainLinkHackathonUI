@@ -8,17 +8,16 @@ import { Observable } from 'rxjs';
 })
 
 export class SmartContractService {
-  private apiUrl = 'http://localhost:5000';
 
   constructor(private http: HttpClient) {}
 
   getAnalysisHistory(userId: number): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/analysisHistory/${userId}`);
+    return this.http.get<any[]>(`http://localhost:6001/analysisHistory/${userId}`);
   }
 
   searchAnalysis(userId: number, name: string, type: string, date: string): Observable<any[]> {
     console.log('Search called with userId:', userId); 
-    return this.http.get<any[]>(`${this.apiUrl}/searchAnalysis`, {
+    return this.http.get<any[]>(`http://localhost:6001/searchAnalysis`, {
       params: { userId, name, type, date }
     });
   }
@@ -34,11 +33,12 @@ export class SmartContractService {
 
   // Fetch contract details by address
   fetchContractByAddress(contractAddress: string): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/getContractDetails/${contractAddress}`);
+    const payload = { contractAddr: contractAddress };
+    return this.http.post<any>(`http://localhost:5000/ethContract/getSmartContractSourceCodeByAddress`, payload);
   }
 
   analyzeSmartContract(solidityVersion: string, contractCode: string) {
-    const apiUrl = 'http://localhost:5000/detect_vulnerability';
+    const apiUrl = 'http://localhost:5000/ethContract/detect_vulnerability';
     const payload = {
       version: solidityVersion,
       code: this.escapeForJson(contractCode)
@@ -48,27 +48,28 @@ export class SmartContractService {
   }
 
   // Save new smart contract analysis result
-  saveContract(contractName: string, solidityVersion: string, smartContractCode: string, userId: number, vulnerabilities: any[]): Observable<any> {
+  saveContract(contractName: string, solidityVersion: string, smartContractCode: string, userId: number, ipfsLink: string, vulnerabilities: any[]): Observable<any> {
     const contractData = {
-      name: contractName,
-      version: solidityVersion,
-      code: smartContractCode,
-      user_id: userId,
-      vulnerabilities: vulnerabilities  // Pass the array of vulnerabilities
+      "name": contractName,
+      "version": solidityVersion,
+      "code": smartContractCode,
+      "user_id": userId,
+      "vulnerabilities": vulnerabilities,  // Pass the array of vulnerabilities
+      "ipfsLink": ipfsLink
     };
-  
-    return this.http.post<any>(`${this.apiUrl}/saveContract`, contractData);
+    console.log(contractData);
+    return this.http.post<any>(`http://localhost:6001/saveContract`, contractData);
   }
 
 
   // Save updated smart contract analysis result
   updateContract(contractData: any): Observable<any> {
-    return this.http.put<any>(`${this.apiUrl}/updateContract/${contractData.id}`, contractData);
+    return this.http.put<any>(`http://localhost:6001/updateContract/${contractData.id}`, contractData);
   }
 
   // Save selected smart contract analysis result
   deleteContract(contractId: number): Observable<any> {
-    return this.http.delete<any>(`${this.apiUrl}/deleteContract/${contractId}`);
+    return this.http.delete<any>(`http://localhost:6001/deleteContract/${contractId}`);
   }
 }
 

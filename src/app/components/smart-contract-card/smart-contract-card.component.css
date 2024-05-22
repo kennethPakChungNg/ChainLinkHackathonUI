@@ -160,8 +160,18 @@ img {
   font-weight: bold;
 }
 
-#get-contract-button{
+#get-contract-button {
   margin-left: 20px;
   width: 240px;
   height: 55px;
+}
+
+.spinner-and-text {
+  display: flex;
+  align-items: center;
+}
+
+.spinner {
+  margin-right: 10px;
+  stroke: white;
 }

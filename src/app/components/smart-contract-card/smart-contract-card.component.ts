@@ -18,8 +18,10 @@ export class SmartContractCardComponent {
   contractAddress: string = '';
   smartContractCode: string = '';
   analysisResult: any;
+  ipfsLink: string = '';
   contractName: string = '';
   isLoading: boolean = false;
+  isFetching: boolean = false;
 
   constructor(
     private smartContractService: SmartContractService,
@@ -82,24 +84,26 @@ export class SmartContractCardComponent {
   // Perform smart contract analysis
   private performAnalysis() {
     this.smartContractService.analyzeSmartContract(this.solidityVersion, this.smartContractCode)
-      .subscribe({
-        next: (response: any) => {
-          this.analysisResult = response;
-          this.isLoading = false; // Hide spinner after getting the response
-          this.changeDetectorRef.detectChanges(); // Trigger change detection
-        },
-        error: (error) => {
-          console.error('API call failed:', error);
-          this.isLoading = false; // Hide spinner on error
-          this.snackBar.open('Analysis failed. Please try again.', 'Close', {
-            duration: 3000,
-            horizontalPosition: 'center',
-            verticalPosition: 'top',
-            panelClass: ['my-custom-snackbar']
-          });
-        }
-      });
+        .subscribe({
+            next: (response: any) => {
+                this.analysisResult = response.result;  // Ensure you access the result part of the response
+                this.ipfsLink = response.ipfsLink;
+                this.isLoading = false; // Hide spinner after getting the response
+                this.changeDetectorRef.detectChanges(); // Trigger change detection
+            },
+            error: (error) => {
+                console.error('API call failed:', error);
+                this.isLoading = false; // Hide spinner on error
+                this.snackBar.open('Analysis failed. Please try again.', 'Close', {
+                    duration: 3000,
+                    horizontalPosition: 'center',
+                    verticalPosition: 'top',
+                    panelClass: ['my-custom-snackbar']
+                });
+            }
+        });
   }
+
   
 
   //Use contract address to fetch contract details
@@ -112,12 +116,27 @@ export class SmartContractCardComponent {
       });
       return;
     }
-    this.isLoading = true;
+    this.isFetching = true; 
     this.smartContractService.fetchContractByAddress(this.contractAddress).subscribe({
       next: (data) => {
-        this.solidityVersion = data.solidityVersion;
-        this.smartContractCode = data.sourceCode;
-        this.isLoading = false;
+        const sourceCode = data[0].SourceCode;
+        // Extract Solidity version using regex
+        const versionMatch = sourceCode.match(/pragma\s+solidity\s+\^?(\d+\.\d+\.\d+);/);
+        if (versionMatch) {
+          this.solidityVersion = versionMatch[1];
+        } else {
+          this.solidityVersion = 'Unknown';
+        }
+  
+        // Decode the SourceCode for readability
+        this.smartContractCode = sourceCode
+          .replace(/\\n/g, '\n')
+          .replace(/\\r/g, '\r')
+          .replace(/\\t/g, '\t')
+          .replace(/\\"/g, '"')
+          .replace(/\\'/g, "'");
+  
+          this.isFetching = false;
       },
       error: (err) => {
         this.snackBar.open('Failed to fetch contract details. Please check the address and try again.', 'Close', {
@@ -125,10 +144,11 @@ export class SmartContractCardComponent {
           verticalPosition: 'top',
           horizontalPosition: 'center'
         });
-        this.isLoading = false;
+        this.isFetching = false;
       }
     });
   }
+  
   
   
   //Save smart contract
@@ -156,7 +176,9 @@ export class SmartContractCardComponent {
         this.solidityVersion, 
         this.smartContractCode,
         currentUser.id, // User ID
+        this.ipfsLink,
         this.analysisResult.Vulnerabilities // Array of vulnerabilities
+        
       )
       .subscribe({
         next: (response) => {
