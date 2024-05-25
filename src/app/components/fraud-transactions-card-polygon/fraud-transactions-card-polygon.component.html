@@ -7,14 +7,6 @@
     </mat-card-header>
     <mat-card-content>
         <div class="transaction-form">
-            <label class="sub_title">Transaction Name (Required For Saving The Result)*</label>
-            <mat-form-field appearance="outline" class="full-width-input">
-                <mat-label>Transaction Name (Required For Saving The Result)</mat-label>
-                <input matInput [(ngModel)]="transactionName" required>
-            </mat-form-field>
-        </div>
-        <br>
-        <div class="transaction-form">
             <label class="sub_title">Transaction Hash (Required)*</label>
             <mat-form-field appearance="outline" class="full-width-input">
                 <mat-label>Transaction Hash (Required)</mat-label>
@@ -53,8 +45,18 @@
                 <br>
                 <p class="fraud-analysis-result"><strong>Recommended Actions:</strong></p>
                 <p class="fraud-analysis-result">{{ fraudAnalysisResult.recommendActions| removeSymbols }}</p>
-                <button mat-raised-button color="accent" (click)="saveAnalysisResult()" [disabled]="!transactionName || !transactionHash" class="save-button">Save Analysis</button>
+                <div class="transaction-form">
+                    <label class="sub_title">Transaction Name (Required For Saving The Result)*</label>
+                    <mat-form-field appearance="outline" class="full-width-input">
+                        <mat-label>Transaction Name (Required For Saving The Result)</mat-label>
+                        <input matInput [(ngModel)]="transactionName" required>
+                    </mat-form-field>
+                    <button mat-raised-button color="accent" (click)="saveAnalysisResult()" [disabled]="!transactionName || !transactionHash" class="save-button">Save Analysis</button>
+                </div>
             </div>
         </mat-card>
     </mat-card-content>
 </mat-card>
+
+
+<!--*ngIf="fraudAnalysisResult"-->

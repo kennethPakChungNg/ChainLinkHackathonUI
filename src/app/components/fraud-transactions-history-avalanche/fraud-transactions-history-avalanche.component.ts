@@ -32,7 +32,7 @@ export class FraudTransactionsHistoryAvalancheComponent {
   getFraudAnalysisHistory(): void {
       const currentUser = this.userService.currentUserValue;
       if (currentUser && currentUser.id) {
-          this.fraudAnalysisService.getFraudAnalysisHistory(currentUser.id).subscribe(
+          this.fraudAnalysisService.avalancheGetFraudAnalysisHistory(currentUser.id).subscribe(
               (history) => {
                   this.fraudAnalysisHistory = history;
               },
@@ -54,7 +54,7 @@ export class FraudTransactionsHistoryAvalancheComponent {
               likelihood: this.searchLikelihood
           };
 
-          this.fraudAnalysisService.searchFraudAnalysis(userId, params).subscribe(
+          this.fraudAnalysisService.avalancheSearchFraudAnalysis(userId, params).subscribe(
               (results) => {
                   this.fraudAnalysisHistory = results;
               },
@@ -80,7 +80,7 @@ export class FraudTransactionsHistoryAvalancheComponent {
 
   saveEdit(): void {
       if (this.selectedAnalysis && window.confirm('Are you sure you want to save the changes?')) {
-          this.fraudAnalysisService.updateFraudAnalysis(this.selectedAnalysis.id, this.selectedAnalysis).subscribe(
+          this.fraudAnalysisService.avalancheUpdateFraudAnalysis(this.selectedAnalysis.id, this.selectedAnalysis).subscribe(
               () => {
                   this.getFraudAnalysisHistory();
                   this.editMode = false;
@@ -103,7 +103,7 @@ export class FraudTransactionsHistoryAvalancheComponent {
   deleteAnalysis(analysisId: number): void {
       const confirmation = confirm('Are you sure you want to delete this analysis?');
       if (confirmation) {
-          this.fraudAnalysisService.deleteFraudAnalysis(analysisId).subscribe(
+          this.fraudAnalysisService.avalancheDeleteFraudAnalysis(analysisId).subscribe(
               () => {
                   this.getFraudAnalysisHistory();
                   this.selectedAnalysis = null;

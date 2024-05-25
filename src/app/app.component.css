@@ -9,4 +9,5 @@
   padding-left: 50px;
   padding-right: 50px;
   width: calc(100% - 200px); /* Adjust width dynamically based on the sidebar width */
+  background-color: #E3FDFD;
 }

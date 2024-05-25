@@ -48,7 +48,14 @@
 </div>
 <!-- Add form fields for displaying and editing the selected analysis result -->
 <div *ngIf="selectedEntry">
+    <hr>
     <h1 id="result_title">Selected Analysis Result</h1>
+    <div class="form-container">
+        <div class="form-element-ipfs">
+            <label for="securityLevel">IPFS Link</label>
+            <input type="text" [(ngModel)]="selectedEntry.ipfs_link" name="ipfsLink" placeholder="IPFS Link" [readonly]="!editMode">
+        </div>
+    </div>
     <div class="form-container">
         <div class="form-element">
             <label for="location">Smart Contract Name</label>

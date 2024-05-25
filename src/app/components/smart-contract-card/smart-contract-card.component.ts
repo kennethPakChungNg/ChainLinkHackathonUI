@@ -156,19 +156,18 @@ export class SmartContractCardComponent {
     // Retrieve the current user from UserService
     const currentUser = this.userService.currentUserValue;
     console.log('Current user:', currentUser);
-
+  
     if (!currentUser || !currentUser.id) {
       console.error('User not logged in or user ID not available');
       return;
     }
-
+  
     if (!this.contractName) {
       // You may want to alert the user or handle this situation appropriately
       console.error('Contract name is required');
       return;
     }
-
-    // Pass the current user's ID when calling saveContract
+  
     const confirmation = window.confirm('Are you sure you want to save this analysis result?');
     if (confirmation) {
       this.smartContractService.saveContract(
@@ -178,7 +177,6 @@ export class SmartContractCardComponent {
         currentUser.id, // User ID
         this.ipfsLink,
         this.analysisResult.Vulnerabilities // Array of vulnerabilities
-        
       )
       .subscribe({
         next: (response) => {
@@ -186,10 +184,11 @@ export class SmartContractCardComponent {
             duration: 3000,
             horizontalPosition: 'center',
             verticalPosition: 'top',
-            panelClass: ['my-custom-snackbar']  // Optional: you can define this class in your styles to customize the snackbar
+            panelClass: ['my-custom-snackbar']  
           });
-
-          this.analysisResult = response;
+  
+          this.analysisResult = null; // Clear the analysis result after saving
+          this.contractName = ''; // Clear the contract name input
           this.changeDetectorRef.detectChanges(); // Manually trigger change detection
         },
         error: (error) => {
@@ -204,4 +203,5 @@ export class SmartContractCardComponent {
       });
     }
   }
+  
 }

@@ -32,7 +32,7 @@ export class FraudTransactionsHistoryPolygonComponent {
   getFraudAnalysisHistory(): void {
       const currentUser = this.userService.currentUserValue;
       if (currentUser && currentUser.id) {
-          this.fraudAnalysisService.getFraudAnalysisHistory(currentUser.id).subscribe(
+          this.fraudAnalysisService.polygonGetFraudAnalysisHistory(currentUser.id).subscribe(
               (history) => {
                   this.fraudAnalysisHistory = history;
               },
@@ -54,7 +54,7 @@ export class FraudTransactionsHistoryPolygonComponent {
               likelihood: this.searchLikelihood
           };
 
-          this.fraudAnalysisService.searchFraudAnalysis(userId, params).subscribe(
+          this.fraudAnalysisService.polygonSearchFraudAnalysis(userId, params).subscribe(
               (results) => {
                   this.fraudAnalysisHistory = results;
               },
@@ -80,7 +80,7 @@ export class FraudTransactionsHistoryPolygonComponent {
 
   saveEdit(): void {
       if (this.selectedAnalysis && window.confirm('Are you sure you want to save the changes?')) {
-          this.fraudAnalysisService.updateFraudAnalysis(this.selectedAnalysis.id, this.selectedAnalysis).subscribe(
+          this.fraudAnalysisService.polygonUpdateFraudAnalysis(this.selectedAnalysis.id, this.selectedAnalysis).subscribe(
               () => {
                   this.getFraudAnalysisHistory();
                   this.editMode = false;
@@ -103,7 +103,7 @@ export class FraudTransactionsHistoryPolygonComponent {
   deleteAnalysis(analysisId: number): void {
       const confirmation = confirm('Are you sure you want to delete this analysis?');
       if (confirmation) {
-          this.fraudAnalysisService.deleteFraudAnalysis(analysisId).subscribe(
+          this.fraudAnalysisService.polygonDeleteFraudAnalysis(analysisId).subscribe(
               () => {
                   this.getFraudAnalysisHistory();
                   this.selectedAnalysis = null;

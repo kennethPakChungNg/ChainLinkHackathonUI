@@ -54,12 +54,14 @@
 <div class="form-container" id="likelihood-of-fraud">
     <input type="text" [(ngModel)]="searchLikelihood" placeholder="Likelihood of Fraud">
 </div>
-<div class="form-container" id="search-transaction-button">
-    <button (click)="search()">Search</button>
+<div class="form-container">
+    <button id="search-transaction-button" (click)="search()">Search</button>
 </div>
+
 
 <!-- Display Result Section -->
 <div *ngIf="selectedAnalysis" class="selected-analysis-details">
+    <hr>
     <h1 id="result_title">Selected Analysis Result</h1>
     <div class="form-container">
         <div class="form-element">
@@ -74,6 +76,8 @@
             <label for="securityLevel">Fraud Transaction Type</label>
             <input type="text" [(ngModel)]="selectedAnalysis.fraud_transaction_type" name="fraudTransactionType" placeholder="Fraud Transaction Type" [readonly]="!editMode" [class.editable]="editMode">
         </div>
+    </div>
+    <div class="form-container">
         <div class="form-element">
             <label for="location">Ownership of From Address</label>
             <input type="text" [(ngModel)]="selectedAnalysis.ownership_from" name="ownershipFrom" placeholder="Ownership of From Address" [readonly]="!editMode" [class.editable]="editMode">

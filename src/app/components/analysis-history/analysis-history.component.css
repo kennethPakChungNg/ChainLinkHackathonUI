@@ -32,6 +32,10 @@ th {
     background-color: #5fc4d1; /* Or any color you prefer */
 }
 
+.form-element-ipfs {
+    font-size: 15px;
+    width: 60%;
+}
 
 
 tr:hover {
@@ -188,11 +192,13 @@ button:disabled {
     margin: 10px;
 }
 
+
 /* Styles for individual form elements */
 .form-element {
     flex: 1; /* Grow each item to use available space */
     min-width: 200px; /* Minimum width of each item */
     font-size: medium;
+    padding-right: 10px;
 }
 
 label {
@@ -250,4 +256,4 @@ img {
     margin-right: 10px;
     margin-bottom: 30px;
 }
-    
+
