@@ -1,62 +1,64 @@
-<!-- Add your template code here with the table and search fields as described -->
-<h1 id="history_title">
-    <img src="assets/images/icons/solidity-big-logo.svg" alt="Solidity Logo">
-    <u>Solidity Smart Contract Vulnerability Analysis History</u>
-</h1>
-<table>
-    <tr>
-        <th>Contract Name</th>
-        <th>Vulnerability Type</th>
-        <th>Security Level</th>
-        <th>Creation Date</th>
-    </tr>
-    <tr *ngFor="let entry of analysisHistory" 
-        (click)="selectEntry(entry)"
-        [class.selected-row]="selectedEntry === entry">
-        <td>{{ entry.contract_name }}</td>
-        <td>{{ entry.vulnerability_type }}</td>
-        <td>{{ entry.security_level }}</td>
-        <td>{{ entry.created_at | date }}</td>
-    </tr>
-</table>
+<div class="header">
+    <h1 id="history_title">
+        <img src="assets/images/icons/solidity-big-logo.svg" alt="Solidity Logo" class="SolidityLogo">
+        <u>Solidity Smart Contract Vulnerability Analysis History</u>
+    </h1>
+</div>
 
-<!-- Search fields -->
-<div class="form-container" id="contract_name">
-    <input type="text" [(ngModel)]="searchName" placeholder="Search by name">
-</div>
-<div class="form-container" id="vul_type">
-    <select [(ngModel)]="searchType">
-    <option value="">Select Vulnerability Type</option>
-    <option value="Reentrancy attacks">Reentrancy attacks</option>
-    <option value="Oracle manipulation">Oracle manipulation</option>
-    <option value="Gas griefing">Gas griefing</option>
-    <option value="Transaction order dependence attacks (frontrunning)">Transaction order dependence attacks (frontrunning)</option>
-    <option value="Force-feeding attacks">Force-feeding attacks</option>
-    <option value="Timestamp dependence">Timestamp dependence</option>
-    <option value="Denial of service">Denial of service</option>
-    <option value="Integer underflows and overflows">Integer underflows and overflows</option>
-    <option value="Information and function exposure">Information and function exposure</option>
-    <option value="Others">Others (Specify in Search)</option>
-    </select>
-    <input type="text" *ngIf="searchType === 'Others'" [(ngModel)]="searchTypeOther" placeholder="Specify Other Type">
-</div>
-<div class="form-container" id="contract_date">
-    <input type="date" [(ngModel)]="searchDate" placeholder="Search by date">
-</div>
-<div class="form-container" id="search_contract_button">
-    <button (click)="search()">Search</button>
-</div>
-<!-- Add form fields for displaying and editing the selected analysis result -->
-<div *ngIf="selectedEntry">
-    <hr>
-    <h1 id="result_title">Selected Analysis Result</h1>
-    <div class="form-container">
-        <div class="form-element-ipfs">
-            <label for="securityLevel">IPFS Link</label>
-            <input type="text" [(ngModel)]="selectedEntry.ipfs_link" name="ipfsLink" placeholder="IPFS Link" [readonly]="!editMode">
+<div class="body-container">
+    <div class="body-table">
+        <table id="analysis-history-table">
+            <tr>
+                <th>Contract Name</th>
+                <th>Vulnerability Type</th>
+                <th>Security Level</th>
+                <th>Creation Date</th>
+            </tr>
+            <tr *ngFor="let entry of analysisHistory" 
+                (click)="selectEntry(entry)"
+                [class.selected-row]="selectedEntry === entry">
+                <td>{{ entry.contract_name }}</td>
+                <td>{{ entry.vulnerability_type }}</td>
+                <td>{{ entry.security_level }}</td>
+                <td>{{ entry.created_at | date }}</td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- Search Section -->
+    <div class="search-section">
+        <div class="form-container" id="contract-name">
+            <input type="text" [(ngModel)]="searchName" placeholder="Search by name">
+        </div>
+        <div class="form-container" id="vulnerability-type">
+            <select [(ngModel)]="searchType">
+                <option value="">Select Vulnerability Type</option>
+                <option value="Reentrancy attacks">Reentrancy attacks</option>
+                <option value="Oracle manipulation">Oracle manipulation</option>
+                <option value="Gas griefing">Gas griefing</option>
+                <option value="Transaction order dependence attacks (frontrunning)">Transaction order dependence attacks (frontrunning)</option>
+                <option value="Force-feeding attacks">Force-feeding attacks</option>
+                <option value="Timestamp dependence">Timestamp dependence</option>
+                <option value="Denial of service">Denial of service</option>
+                <option value="Integer underflows and overflows">Integer underflows and overflows</option>
+                <option value="Information and function exposure">Information and function exposure</option>
+                <option value="Others">Others (Specify in Search)</option>
+            </select>
+            <input type="text" *ngIf="searchType === 'Others'" [(ngModel)]="searchTypeOther" placeholder="Specify Other Type">
+        </div>
+        <div class="form-container" id="contract-date">
+            <input type="date" [(ngModel)]="searchDate" placeholder="Search by date">
+        </div>
+        <div class="form-container">
+            <button id="search-contract-button" (click)="search()">Search</button>
         </div>
     </div>
-    <div class="form-container">
+</div>
+
+<!-- Display Result Section -->
+<div *ngIf="selectedEntry" class="selected-analysis-details">
+    <h1 id="result_title">Selected Analysis Result</h1>
+    <div class="form-container horizontal-container">
         <div class="form-element">
             <label for="location">Smart Contract Name</label>
             <input type="text" [(ngModel)]="selectedEntry.contract_name" name="contractName" placeholder="Contract Name" [readonly]="!editMode" [class.editable]="editMode">
@@ -69,6 +71,14 @@
             <label for="securityLevel">Security Level</label>
             <input type="text" [(ngModel)]="selectedEntry.security_level" name="securityLevel" placeholder="Security Level" [readonly]="!editMode" [class.editable]="editMode">
         </div>
+    </div>
+    <div class="form-container">
+        <div class="form-element">
+            <label for="location">IPFS Link</label>
+            <input type="text" [(ngModel)]="selectedEntry.ipfs_link" name="ipfsLink" placeholder="IPFS Link" [readonly]="!editMode" [class.editable]="editMode">
+        </div>
+    </div>
+    <div class="form-container">
         <div class="form-element">
             <label for="location">Location</label>
             <input type="text" [(ngModel)]="selectedEntry.location" name="location" placeholder="Location" [readonly]="!editMode" [class.editable]="editMode">
@@ -99,5 +109,3 @@
         <button (click)="delete(selectedEntry.id)" [disabled]="!selectedEntry || editMode" class="delete-btn">Delete</button>
     </div>
 </div>
-
-  

@@ -1,101 +1,92 @@
-<!-- smart-contract-card.component.html -->
-<mat-card class="smart-contract-analysis-card">
-  <mat-card-header class="page_title">
-    <mat-card-title class="header_title">
-      <img src="assets/images/icons/solidity-big-logo.svg" alt="Solidity Logo">
-      <u>Solidity Smart Contract Analysis</u>
-    </mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
-    <div class="form-container">
-      <div class="form-section">
-        <label class="address-sub-title"><span style="color: #88aaf1;">Ethereum</span> Chain Smart Contract Address*</label>
-        <div class="transaction-form-address">
-          <div class="smart-contract-address-div">
-            <mat-form-field appearance="outline" class="input_field">
-              <mat-label>Ethereum Chain Smart Contract Address</mat-label>
-              <input matInput placeholder="Enter Contract Address" [(ngModel)]="contractAddress">
-            </mat-form-field>
-            <button id="get-contract-button" mat-raised-button color="primary" (click)="fetchContractDetails()">
-              <ng-container *ngIf="isFetching; else fetchText">
-                <div class="spinner-and-text">
-                  <mat-spinner class="spinner" [diameter]="20" [color]="'accent'"></mat-spinner>
-                  <span>Getting Code</span>
-                </div>
-              </ng-container>
-              <ng-template #fetchText>Get Contract</ng-template>
-            </button>
-          </div>
-        </div>
-        <div class="transaction-form-version">
-          <label class="sub_title">Solidity Version (Required)*</label>
-          <mat-form-field appearance="outline" class="input_field">
-            <mat-label>Enter Solidity version (e.g. 0.8.4)</mat-label>
-            <input matInput placeholder="Enter Solidity Version" [(ngModel)]="solidityVersion">
-          </mat-form-field>
-        </div>
-      </div>
-      <div class="instruction-section">
-        <div class="instruction">
-          <p id="instruction-label-text">
-            <b>Instruction:</b>
-          </p>
-          <p id="instruction-text">
-            User could input the Ethereum chain smart contract address and press the get contract button. The contract source code will be  
-            catch from the address and display in <b>Solidity Version</b> field and <b>Smart Contract Code</b> field.
-          </p>
-          <p id="instruction-text">
-            If it is another chain's Solidity smart contract, user need to input the Solidity version and contract source code directly.
-          </p>
-        </div>
+<div class="header">
+  <mat-card-title class="header_title">
+    <img src="assets/images/icons/solidity-big-logo.svg" alt="Solidity Logo">
+    <u>Solidity Smart Contract Analysis</u>
+  </mat-card-title>
+</div>
+
+<div class="form-container">
+  <div class="form-section">
+    <label class="address-sub-title"><span style="color: #88aaf1;">Ethereum</span> Chain Smart Contract Address*</label>
+    <div class="transaction-form-address">
+      <div class="smart-contract-address-div">
+        <mat-form-field appearance="outline" class="input_field">
+          <mat-label>Ethereum Chain Smart Contract Address</mat-label>
+          <input matInput placeholder="Enter Contract Address" [(ngModel)]="contractAddress">
+        </mat-form-field>
+        <button id="get-contract-button" mat-raised-button color="primary" (click)="fetchContractDetails()">
+          <ng-container *ngIf="isFetching; else fetchText">
+            <div class="spinner-and-text">
+              <mat-spinner class="spinner" [diameter]="20" [color]="'accent'"></mat-spinner>
+              <span>Getting Code</span>
+            </div>
+          </ng-container>
+          <ng-template #fetchText>Get Contract</ng-template>
+        </button>
       </div>
     </div>
-    <label class="sub_title">Smart Contract Code (Required)*</label>
-    <div class="transaction-form">  
-      <mat-form-field appearance="outline" class="full-width-input-code">
-        <textarea matInput placeholder="Enter smart contract code here..." rows="10" [(ngModel)]="smartContractCode"></textarea>
+    <div class="transaction-form-version">
+      <label class="sub_title">Solidity Version (Required)*</label>
+      <mat-form-field appearance="outline" class="input_field">
+        <mat-label>Enter Solidity version (e.g. 0.8.4)</mat-label>
+        <input matInput placeholder="Enter Solidity Version" [(ngModel)]="solidityVersion">
       </mat-form-field>
     </div>
-    <div>
-      <button mat-raised-button color="primary" 
-        (click)="analyzeSmartContract()"
-        [disabled]="!contractAddress && (!smartContractCode.trim() || (solidityVersion && !isValidSolidityVersion(solidityVersion)))"
-        class="analyze-button">Analyze Contract
-      </button>
-      <div>
-        <p class="analysis-notification">The analysis result will be displayed below.</p>
-      </div>
+  </div>
+  <div class="instruction-section">
+    <div class="instruction">
+      <p id="instruction-label-text">
+        <b>Instruction:</b>
+      </p>
+      <p id="instruction-text">
+        User could input the Ethereum chain smart contract address and press the get contract button. The contract source code will be  
+        catch from the address and display in <b>Solidity Version</b> field and <b>Smart Contract Code</b> field.
+      </p>
+      <p id="instruction-text">
+        If it is another chain's Solidity smart contract, user need to input the Solidity version and contract source code directly.
+      </p>
     </div>
-    <br>
-    <div class="spinner-container" *ngIf="isLoading">
-      <mat-spinner></mat-spinner>
-      <div class="analyzing-text">Analyzing contract...</div>
-    </div>
-    <br>
-    <div *ngIf="analysisResult" class="smart-contract-analysis-card">
-      <div *ngFor="let vulnerability of analysisResult.Vulnerabilities; index as i">
-        <h2 class="fraud-analysis-result"><u>ANALYSIS RESULT</u></h2>
-        <h3 class="vul_type"><b>Vulnerability {{ i + 1 }}: {{ vulnerability.Type | removeSymbolsSmartContract }}</b></h3>
-        <p class="security_level"><strong>Security Level:</strong> {{ vulnerability.Level | removeSymbolsSmartContract }}</p>
-        <p><strong>Location:</strong> {{ vulnerability.Location | removeSymbolsSmartContract }}</p>
-        <p><strong>Consequences:</strong> {{ vulnerability.Consequences | removeSymbolsSmartContract }}</p>
-        <p><strong>Recommendation:</strong> {{ vulnerability.Recommendation | removeSymbolsSmartContract }}</p>
-        <p><strong>Explanation:</strong> {{ vulnerability.Explanation | removeSymbolsSmartContract }}</p>
-      </div>
-      <hr>
-      <div class="transaction-form-contract-name">
-        <label class="sub_title">Smart Contract Name (Required For Saving The Result)*</label>
-        <mat-form-field appearance="outline" class="input_field">
-          <mat-label>Smart Contract Name (For saving analysis result)*</mat-label>
-          <input matInput placeholder="Enter name" [(ngModel)]="contractName">
-        </mat-form-field>
-      </div>
-      <button mat-raised-button color="primary"
-        (click)="saveSmartContract()"
-        [disabled]="!contractName.trim()"
-        class="analyze-button">
-        Save Analysis Result
-      </button>
-    </div>
-  </mat-card-content>
-</mat-card>
+  </div>
+</div>
+
+<div class="transaction-form">  
+  <label class="sub_title">Smart Contract Code (Required)*</label>
+  <textarea matInput placeholder="Enter smart contract code here..." rows="10" [(ngModel)]="smartContractCode" class="full-width-input-code"></textarea>
+  <button mat-raised-button color="primary" 
+    (click)="analyzeSmartContract()"
+    [disabled]="!contractAddress && (!smartContractCode.trim() || (solidityVersion && !isValidSolidityVersion(solidityVersion)))"
+    class="analyze-button">Analyze Contract
+  </button>
+</div>
+
+<div class="spinner-container" *ngIf="isLoading">
+  <mat-spinner></mat-spinner>
+  <div class="analyzing-text">Analyzing contract...</div>
+</div>
+
+<!-- Result Section -->
+<div *ngIf="analysisResult" class="smart-contract-analysis-card">
+  <h2 class="fraud-analysis-result-title"><u>ANALYSIS RESULT</u></h2>
+  <div *ngFor="let vulnerability of analysisResult.Vulnerabilities; index as i">
+    <h3 class="vul_type"><b>Vulnerability {{ i + 1 }}: {{ vulnerability.Type | removeSymbolsSmartContract }}</b></h3>
+    <p class="security_level"><strong>Security Level:</strong> {{ vulnerability.Level | removeSymbolsSmartContract }}</p>
+    <p><strong>Location:</strong> {{ vulnerability.Location | removeSymbolsSmartContract }}</p>
+    <p><strong>Consequences:</strong> {{ vulnerability.Consequences | removeSymbolsSmartContract }}</p>
+    <p><strong>Recommendation:</strong> {{ vulnerability.Recommendation | removeSymbolsSmartContract }}</p>
+    <p><strong>Explanation:</strong> {{ vulnerability.Explanation | removeSymbolsSmartContract }}</p>
+  </div>
+</div>
+<div *ngIf="analysisResult" class="transaction-form-contract-name">
+  <label class="sub_title">Smart Contract Name (Required For Saving The Result)*</label>
+  <mat-form-field appearance="outline" class="input_field">
+    <mat-label>Smart Contract Name (For saving analysis result)*</mat-label>
+    <input matInput placeholder="Enter name" [(ngModel)]="contractName">
+  </mat-form-field>
+  <button mat-raised-button color="primary"
+    (click)="saveSmartContract()"
+    [disabled]="!contractName.trim()"
+    class="analyze-button">
+    Save Analysis Result
+  </button>
+</div>
+

@@ -1,57 +1,68 @@
-<h1 id="history_title">
-    <img src="assets/images/icons/polygon-big-logo.png" alt="PolygonLogo" class="PolygonLogo">
-    <u>Polygon Fraud Transaction Analysis History</u>
-</h1>
+<div class="header">
+    <h1 id="history_title">
+        <img src="assets/images/icons/polygon-big-logo.png" alt="PolygonLogo" class="PolygonLogo">
+        <u>Polygon Fraud Transaction Analysis History</u>
+    </h1>
+</div>
 
-<!-- Analysis History Table -->
-<table class="analysis-history-table">
-    <tr>
-        <th>Transaction Name</th>
-        <th>Ownership of From Address</th>
-        <th>Ownership of To Address</th>
-        <th>Fraud Transaction Type</th>
-        <th>Likelihood of Fraud</th>
-        <th>Result Saved On</th>
-    </tr>
-    <tr *ngFor="let analysis of fraudAnalysisHistory"
-        (click)="selectAnalysis(analysis)"
-        [class.selected-row]="selectedAnalysis === analysis">
-        <td>{{ analysis.transaction_name }}</td>
-        <td>{{ analysis.ownership_from }}</td>
-        <td>{{ analysis.ownership_to }}</td>
-        <td>{{ analysis.fraud_transaction_type }}</td>
-        <td>{{ analysis.likelihood_of_fraud }}</td>
-        <td>{{ analysis.created_at }}</td>
-    </tr>
-</table>
+<div class="body-table">
+    <table id="analysis-history-table">
+        <tr>
+            <th>Transaction Name</th>
+            <th>Ownership of From Address</th>
+            <th>Ownership of To Address</th>
+            <th>Fraud Transaction Type</th>
+            <th>Likelihood of Fraud</th>
+            <th>Result Saved On</th>
+        </tr>
+        <tr *ngFor="let analysis of fraudAnalysisHistory"
+            (click)="selectAnalysis(analysis)"
+            [class.selected-row]="selectedAnalysis === analysis">
+            <td>{{ analysis.transaction_name }}</td>
+            <td>{{ analysis.ownership_from }}</td>
+            <td>{{ analysis.ownership_to }}</td>
+            <td>{{ analysis.fraud_transaction_type }}</td>
+            <td>{{ analysis.likelihood_of_fraud }}</td>
+            <td>{{ analysis.created_at }}</td>
+        </tr>
+    </table>
 
-<!-- Search Section -->
-<div class="form-container" id="transaction-name">
-    <input type="text" [(ngModel)]="searchName" placeholder="Transaction Name">
-</div>
-<div class="form-container" id="fraud-type">
-    <select [(ngModel)]="searchType">
-        <option value="">Select Fraud Type</option>
-        <!-- Add other fraud types as needed -->
-    </select>
-    <input type="text" *ngIf="searchType === 'Others'" [(ngModel)]="searchTypeOther" placeholder="Specify Other Type">
-</div>
-<div class="form-container" id="ownership-from">
-    <input type="text" [(ngModel)]="searchOwnershipFrom" placeholder="Ownership of From Address">
-</div>
-<div class="form-container" id="ownership-to">
-    <input type="text" [(ngModel)]="searchOwnershipTo" placeholder="Ownership of To Address">
-</div>
-<div class="form-container" id="likelihood-of-fraud">
-    <input type="text" [(ngModel)]="searchLikelihood" placeholder="Likelihood of Fraud">
-</div>
-<div class="form-container">
-    <button id="search-transaction-button" (click)="search()">Search</button>
+    <!-- Search Section -->
+    <div class="form-container" id="transaction-name">
+        <input type="text" [(ngModel)]="searchName" placeholder="Transaction Name">
+    </div>
+    <div class="form-container" id="fraud-type">
+        <select [(ngModel)]="searchType">
+            <option value="">Select Fraud Type</option>
+            <option value="Broker Or Dealer Fraud">Broker Or Dealer Fraud</option>
+            <option value="Financial Crimes">Financial Crimes</option>
+            <option value="Market Manipulation">Market Manipulation</option>
+            <option value="Ponzi Schemes">Ponzi Schemes</option>
+            <option value="Pump and Dump Schemes">Pump and Dump Schemes</option>
+            <option value="Scam Initial Coin Offerings">Scam Initial Coin Offerings</option>
+            <option value="Traditional Theft">Traditional Theft</option>
+            <option value="Unscrupulous Promotors">Unscrupulous Promotors</option>
+            <option value="Unknown">Unknown</option>
+            <option value="Other">Other</option>
+        </select>
+        <input type="text" *ngIf="searchType === 'Other'" [(ngModel)]="searchTypeOther" placeholder="Specify Other Type">
+    </div>
+    <div class="form-container" id="ownership-from">
+        <input type="text" [(ngModel)]="searchOwnershipFrom" placeholder="Ownership of From Address">
+    </div>
+    <div class="form-container" id="ownership-to">
+        <input type="text" [(ngModel)]="searchOwnershipTo" placeholder="Ownership of To Address">
+    </div>
+    <div class="form-container" id="likelihood-of-fraud">
+        <input type="text" [(ngModel)]="searchLikelihood" placeholder="Likelihood of Fraud">
+    </div>
+    <div class="form-container">
+        <button id="search-transaction-button" (click)="search()">Search</button>
+    </div>
 </div>
 
 <!-- Display Result Section -->
 <div *ngIf="selectedAnalysis" class="selected-analysis-details">
-    <hr>
     <h1 id="result_title">Selected Analysis Result</h1>
     <div class="form-container">
         <div class="form-element">

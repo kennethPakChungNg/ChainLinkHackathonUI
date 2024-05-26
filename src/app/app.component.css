@@ -1,13 +1,39 @@
 .container-fluid {
-    display: flex;
-  }
-  
-  /* This class is for the main content area */
+  padding: 0%;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
 .main-content {
-  margin-left: 300px; /* This should be the width of your sidebar */
-  flex-grow: 1; /* Ensures that the content area takes up the remaining space */
+  margin-left: 288px;
+  flex-grow: 1;
   padding-left: 50px;
-  padding-right: 50px;
-  width: calc(100% - 200px); /* Adjust width dynamically based on the sidebar width */
-  background-color: #E3FDFD;
+  padding-bottom: 50px;
+}
+
+.footer {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #222831; /* Add background color if needed */
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding-left: 300px;
+}
+
+.copy-right-logo {
+  margin-right: 10px;
+  width: 30px;
+  height: auto;
+}
+
+.footer-text {
+  font-weight: bold;
+  font-size: medium;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  color: #f8f9fa;
+  padding-top: 10px;
 }
