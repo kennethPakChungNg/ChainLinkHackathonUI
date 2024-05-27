@@ -1,17 +1,42 @@
 h2, h3 {
-    color: #333;
+    color: #ffffff;
     margin-bottom: 10px;
     font-size: 20px;
-    margin-top: 20px;
 }
 
 #card_header {
     font-size: 24px;
-    margin-bottom: 20px;
-    margin-left: 60px;
-    text-align: center;
-    width: 1100px;
+    margin-top: 20px;
+    padding-left: 4rem;
+    width: 100%;
     font-weight: bold;
+    background-color: #ffffff;
+}
+
+.transaction-chain-logo{
+    height: 60px;
+    padding-left: 2rem;
+    background-color: #CBF1F5;
+    padding-top: 10px;
+}
+  
+.transaction-chain-title{
+    text-align: center;
+    height: 90px;
+    font-weight: bold;
+    font-size: 30px;
+}
+  
+.chain-logo {
+    width: 45px;
+    margin-right: 10px;
+    margin-bottom: 15px;
+}
+
+img {
+    width: 50px;
+    margin-right: 10px;
+    margin-bottom: 20px;
 }
 
 .transaction-form {
@@ -20,29 +45,12 @@ h2, h3 {
     gap: 5px;
 }
 
-.full-width-input {
-    width: 50%;
-}
-
-.fraud-analysis-result {
-    margin: 2px;
-}
-
-.analyze-button {
-    max-width: 200px;
-    margin-left: 2px;
-}
-
-.sub_title {
-    font-weight: bold;
-    display: block;
-    margin-top: 0.5em;
-    margin-bottom: 0.3em;
-    font-size: large;
-}
-
-p {
-    margin-bottom: 0.5em;
+.transaction-form-hash {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    background-color: #CBF1F5;
+    height: 200px;
 }
 
 .spinner-container {
@@ -51,9 +59,11 @@ p {
     align-items: center;
     justify-content: center;
     height: 100px;
-    margin-top: 20px;
+    margin-top: 50px;
+    margin-bottom: 50px;
     font-size: 1.2em;
     font-weight: bold;
+    background-color: #ffffff;
 }
 
 .spinner-container .mat-spinner {
@@ -61,13 +71,62 @@ p {
     height: 50px;
 }
 
-.save-button {
-    margin-top: 10px;
-    padding-top: 10px;
+.sub_title {
+    font-weight: bold;
+    display: block;
+    margin-top: 1rem;
+    margin-bottom: 0.3em;
+    margin-left: 1rem;
+    font-size: large;
+    padding-left: 1rem;
 }
 
-img {
-    width: 50px;
-    margin-right: 10px;
-    margin-bottom: 20px;
+.full-width-input {
+    width: 50%;
+    margin-left: 2rem;
+    background-color: #ffffff;
+    height: 55px;
+}
+
+.analyze-result-area {
+    background-color: #0c162c;
+    color: #ffffff;
+    padding-bottom: 10px;
+}
+
+.fraud-analysis-result {
+    margin: 0 10px;
+    padding-left: 20px;
+}
+
+#fraud-analysis-result-title {
+    text-align: center;
+    font-weight: bold;
+    font-size: 30px;
+    text-decoration-line: underline;
+    padding: 30px 0;
+}
+
+.analyze-button {
+    max-width: 200px;
+    margin-left: 44%;
+    margin-top: 2rem;
+}
+
+p {
+    margin-bottom: 0.5em;
+}
+
+.save-button {
+    margin-left: 40%;
+    width: 20%;
+}
+
+#transaction-form-savename {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    background-color: #CBF1F5;
+    height: 200px;
+    padding: 10px 0;
 }

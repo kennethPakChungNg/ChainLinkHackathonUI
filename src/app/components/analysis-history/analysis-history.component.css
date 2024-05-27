@@ -2,9 +2,33 @@
     height: 90px;
 }
 
-.SolidityLogo {
-    width: 30px;
+#history_title {
+    font-weight: 900;
+    padding: 20px 3rem;
 }
+
+.history-language-logo{
+    height: 60px;
+    padding-left: 2rem;
+    background-color: #CBF1F5;
+    padding-top: 10px;
+    text-align: left;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.title-logo {
+    width: 50px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.language-logo {
+    width: 25px;
+    margin-right: 10px;
+    margin-bottom: 15px;
+}
+
 
 .body-container {
     display: flex;
@@ -155,12 +179,6 @@ label {
     padding-bottom: 10px;
 }
 
-#history_title {
-    text-align: center;
-    font-weight: 900;
-    padding: 20px;
-}
-
 textarea {
     height: 150px;
 }
@@ -209,8 +227,4 @@ button {
     }
 }
 
-img {
-    width: 50px;
-    margin-right: 10px;
-    margin-bottom: 20px;
-}
+

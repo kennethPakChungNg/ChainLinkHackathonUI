@@ -1,5 +1,26 @@
 .header {
     height: 90px;
+    padding-left: 2rem;
+}
+
+.transaction-chain-logo{
+    height: 60px;
+    padding-left: 2rem;
+    background-color: #CBF1F5;
+    padding-top: 10px;
+}
+
+.transaction-chain-title{
+    text-align: center;
+    height: 90px;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.chain-logo {
+    width: 45px;
+    margin-right: 10px;
+    margin-bottom: 15px;
 }
 
 .ETHlogo {
@@ -9,7 +30,6 @@
 }
 
 #history_title {
-    text-align: center;
     font-weight: 900;
     padding: 20px;
 }

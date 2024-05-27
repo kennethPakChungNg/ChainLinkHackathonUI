@@ -3,9 +3,46 @@ h2, h3, h4 {
 }
 
 .header {
+  height: 70px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding-left: 2rem;
+
+}
+
+.smart-contract-logo {
+  width: 50px;
+  margin-right: 10px;
+  margin-bottom: 15px;
+  padding-top: 10px;
+}
+
+.language-logo {
+  width: 25px;
+  margin-right: 10px;
+  margin-bottom: 15px;
+}
+
+.header_title {
+  font-size: 24px;
+  margin-bottom: 10px;
+  padding: 20px;
+  text-align: center;
+  font-weight: 900;
+}
+
+.contract-language-logo{
+  height: 60px;
+  padding-left: 2rem;
+  background-color: #CBF1F5;
+  padding-top: 10px;
+}
+
+.contract-language-title{
   text-align: center;
   height: 90px;
-  margin-top: 20px;
+  font-weight: bold;
+  font-size: 30px;
 }
 
 h2 {
@@ -94,13 +131,6 @@ h2 {
   margin-top: 1rem;
 }
 
-.header_title {
-  font-size: 24px;
-  margin-bottom: 10px;
-  text-align: center;
-  font-weight: 900;
-}
-
 button {
   width: 200px;
 }
@@ -149,12 +179,6 @@ button {
   font-size: 1.2em;
   color: #555; 
   font-weight: bold;
-}
-
-img {
-  width: 35px;
-  margin-right: 10px;
-  margin-bottom: 30px;
 }
 
 .instruction {
