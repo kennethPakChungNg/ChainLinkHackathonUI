@@ -151,6 +151,12 @@ button {
   color: red;
 }
 
+.vul_type {
+  color: #ffffff;
+  font-size: 22px;
+
+}
+
 .centered-snack-bar {
   display: flex !important;
   justify-content: center;
@@ -163,15 +169,15 @@ button {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100px; 
+  height: 400px; 
   margin-top: 20px; 
   font-size: 1.2em; 
   font-weight: bold;
 }
 
 .spinner-container .mat-spinner {
-  width: 50px;
-  height: 50px;
+  width: 20px;
+  height: 20px;
 }
 
 .spinner-container .analyzing-text {
